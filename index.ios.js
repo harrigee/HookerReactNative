@@ -119,6 +119,7 @@ const styles =  StyleSheet.create({
     flex:1.1,
     paddingLeft:64,
     paddingRight:64,
+    marginBottom:64,
     alignSelf:'center',
   },
   innerLayout: {
@@ -126,6 +127,7 @@ const styles =  StyleSheet.create({
   },
   listView: {
     flex:0.1,
+    width:vw(100),
     marginTop:64,
     alignSelf:'center'
   },
@@ -135,15 +137,19 @@ const styles =  StyleSheet.create({
   listText: {
     fontSize:18,
     padding:4,
+    paddingBottom:8,
+    alignSelf:'center',
+    fontWeight: '100'
   },
   buttonText: {
     color:'black',
     fontSize:48
   },
   screenName: {
-    flex:0.23,
-    paddingTop:48,
-    marginBottom:32,
+    flex:0.18,
+    paddingTop:40,
+    paddingBottom:16,
+    marginBottom:16,
     fontSize:40,
     textAlign:'right',
     color:'rgba(232,142,12,1)',

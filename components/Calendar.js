@@ -34,6 +34,16 @@ class Calendar extends Component {
               selected={this.state.date}
               minDate={Moment()}
               maxDate={Moment().add(10, 'years').startOf()}
+              yearMinTintColor={'rgba(232,142,12,1)'}
+              yearMaxTintColor={'rgba(232,142,12,1)'}
+              style={{
+            alignSelf: 'center',
+            marginTop: 20,
+          }}
+          barView={{
+            backgroundColor: 'rgba(0,0,0,0)',
+            padding: 10,
+          }}
               />
           </View>
         );
