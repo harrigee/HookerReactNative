@@ -33,7 +33,7 @@ class Calendar extends Component {
               onChange={(date) => this.setMoment(date)}
               selected={this.state.date}
               minDate={Moment()}
-              maxDate={Moment().add(10, 'years').startOf()}
+              maxDate={Moment().add(3, 'years').startOf()}
               yearMinTintColor={'rgba(232,142,12,1)'}
               yearMaxTintColor={'rgba(232,142,12,1)'}
               style={{

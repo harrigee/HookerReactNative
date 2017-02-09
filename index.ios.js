@@ -44,6 +44,13 @@ export default class HookerReactNative extends Component {
               'available from 12:00 to 14:00',
               'not available from 14:00 to 18:00',
               'available from 18:00 to 00:00',
+              'available from 00: to 08:00',
+              'not available from 08:00 to 09:00',
+              'available from 09:00 to 11:00',
+              'not available from 11:00 to 12:00',
+              'available from 12:00 to 14:00',
+              'not available from 14:00 to 18:00',
+              'available from 18:00 to 00:00',
       ])
     };
   }
@@ -52,7 +59,14 @@ export default class HookerReactNative extends Component {
     this.setState({index:state.index});
   }
 
+  _renderHeader() {
+    return (
+      <View style={styles.calendar}><Calendar/></View>
+    )
+  }
+
   render() {
+
     return (
       <View style={styles.container}>
         <Image source={require('./assets/background.png')} style={styles.imageContainer}>
@@ -66,32 +80,23 @@ export default class HookerReactNative extends Component {
               >
               <View style={styles.innerLayout}>
                 <Text style={styles.screenName}>#{this.state.screenName[0]}</Text>
-                <View style={styles.calendar}>
-                  <Calendar/>
-                </View>
-                <ListView style={styles.listView} dataSource={this.state.dataSource} renderRow={(rowData) =>
+                <ListView renderHeader={this._renderHeader} style={styles.listView} dataSource={this.state.dataSource} renderRow={(rowData) =>
                   <View>
                     <Text style={styles.listText}>{rowData}</Text>
                   </View>}/>
                 <View style={styles.footerView}></View>
               </View>
               <View style={styles.innerLayout}>
-                <Text style={styles.screenName}>#{this.state.screenName[1]}</Text>
-                <View style={styles.calendar}>
-                  <Calendar/>
-                </View>
-                <ListView style={styles.listView} dataSource={this.state.dataSource} renderRow={(rowData) =>
+                <Text style={styles.screenName}>#{this.state.screenName[0]}</Text>
+                <ListView renderHeader={this._renderHeader} style={styles.listView} dataSource={this.state.dataSource} renderRow={(rowData) =>
                   <View>
                     <Text style={styles.listText}>{rowData}</Text>
                   </View>}/>
                 <View style={styles.footerView}></View>
               </View>
               <View style={styles.innerLayout}>
-                <Text style={styles.screenName}>#{this.state.screenName[2]}</Text>
-                <View style={styles.calendar}>
-                  <Calendar/>
-                </View>
-                <ListView style={styles.listView} dataSource={this.state.dataSource} renderRow={(rowData) =>
+                <Text style={styles.screenName}>#{this.state.screenName[0]}</Text>
+                <ListView renderHeader={this._renderHeader} style={styles.listView} dataSource={this.state.dataSource} renderRow={(rowData) =>
                   <View>
                     <Text style={styles.listText}>{rowData}</Text>
                   </View>}/>
@@ -119,7 +124,7 @@ const styles =  StyleSheet.create({
     flex:1.1,
     paddingLeft:64,
     paddingRight:64,
-    marginBottom:64,
+    marginBottom:16,
     alignSelf:'center',
   },
   innerLayout: {
@@ -128,16 +133,14 @@ const styles =  StyleSheet.create({
   listView: {
     flex:0.1,
     width:vw(100),
-    marginTop:64,
     alignSelf:'center'
   },
   footerView: {
-    flex:0.3,
+    paddingBottom:48,
   },
   listText: {
     fontSize:18,
     padding:4,
-    paddingBottom:8,
     alignSelf:'center',
     fontWeight: '100'
   },
@@ -146,7 +149,7 @@ const styles =  StyleSheet.create({
     fontSize:48
   },
   screenName: {
-    flex:0.18,
+    flex:0.07,
     paddingTop:40,
     paddingBottom:16,
     marginBottom:16,
