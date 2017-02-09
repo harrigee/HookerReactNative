@@ -1015,7 +1015,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = stefan.gregor.HookerReactNative;
 				PRODUCT_NAME = HookerReactNative;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1035,7 +1035,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = stefan.gregor.HookerReactNative;
 				PRODUCT_NAME = HookerReactNative;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
