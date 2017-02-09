@@ -9,7 +9,8 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Image
 } from 'react-native';
 
 import Calendar from './components/Calendar'
@@ -18,7 +19,11 @@ export default class HookerReactNative extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Calendar/>
+        <Image source={require('./assets/background.png')} style={styles.imageContainer}>
+        <View style={styles.innerLayout}>
+          <Calendar/>
+        </View>
+        </Image>
       </View>
     );
   }
@@ -29,8 +34,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  }
+  },
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    resizeMode: 'cover'
+  },
+  innerLayout: {
+    top:64,
+    zIndex:1
+  },
 });
 
 AppRegistry.registerComponent('HookerReactNative', () => HookerReactNative);

@@ -5,12 +5,31 @@ import {
   View
 } from 'react-native';
 
+import CalendarDatePicker from 'react-native-calendar-datepicker';
+import Moment from 'moment';
+
 class Calendar extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      date:Moment()
+    };
+  }
+
+  componentDidMount() {
+    console.log(Moment().startOf("2014-04-25T01:32:21.196+0600"));
+  }
 
     render() {
         return (
           <View>
-            <Text>Calendar</Text>
+            <CalendarDatePicker
+              onChange={(date) => this.setState({date})}
+              selected={this.state.date}
+              minDate={Moment()}
+              maxDate={Moment().add(10, 'years').startOf()}
+              />
           </View>
         );
     }
