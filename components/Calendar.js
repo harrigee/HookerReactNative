@@ -37,13 +37,31 @@ class Calendar extends Component {
               yearMinTintColor={'rgba(232,142,12,1)'}
               yearMaxTintColor={'rgba(232,142,12,1)'}
               style={{
-            alignSelf: 'center',
-            marginTop: 20,
-          }}
-          barView={{
-            backgroundColor: 'rgba(0,0,0,0)',
-            padding: 10,
-          }}
+                alignSelf: 'center',
+                marginTop: 20,
+              }}
+              barView={{
+                backgroundColor: 'rgba(0,0,0,0)',
+                padding: 10,
+              }}
+              barText={{
+                fontWeight: 'bold',
+                color: 'white',
+              }}
+              dayHeaderText={{
+                fontWeight: 'bold',
+                color: 'rgba(232,142,12,1)',
+              }}
+              dayText={{
+                color: 'white',
+              }}
+              monthText={{
+                color: 'white',
+                borderColor: 'rgba(232,142,12,1)',
+              }}
+              yearText={{
+                color: 'rgba(232,142,12,1)',
+              }}
               />
           </View>
         );

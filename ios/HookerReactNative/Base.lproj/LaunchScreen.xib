@@ -14,10 +14,22 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="0.24622699618339539" green="0.29897946119308472" blue="0.32460576295852661" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mantro" translatesAutoresizingMaskIntoConstraints="NO" id="pO0-hz-PIm">
+                    <rect key="frame" x="190" y="190" width="100" height="100"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="0.32576823234558105" green="0.64310926198959351" blue="0.85918951034545898" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="pO0-hz-PIm" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="FKS-pc-9WX"/>
+                <constraint firstItem="pO0-hz-PIm" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="LJV-MU-iVW"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="548" y="455"/>
         </view>
     </objects>
+    <resources>
+        <image name="mantro" width="100" height="100"/>
+    </resources>
 </document>

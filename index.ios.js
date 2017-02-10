@@ -12,7 +12,8 @@ import {
   View,
   Image,
   Dimensions,
-  ListView
+  ListView,
+  StatusBar
 } from 'react-native';
 
 import Calendar from './components/Calendar'
@@ -37,14 +38,7 @@ export default class HookerReactNative extends Component {
       screenName:['workshopRoom', 'meetingRoom', 'kitchen'],
       index:0,
       dataSource: ds.cloneWithRows([
-              'available from 00: to 08:00',
-              'not available from 08:00 to 09:00',
-              'available from 09:00 to 11:00',
-              'not available from 11:00 to 12:00',
-              'available from 12:00 to 14:00',
-              'not available from 14:00 to 18:00',
-              'available from 18:00 to 00:00',
-              'available from 00: to 08:00',
+              'available from 00:00 to 08:00',
               'not available from 08:00 to 09:00',
               'available from 09:00 to 11:00',
               'not available from 11:00 to 12:00',
@@ -69,7 +63,8 @@ export default class HookerReactNative extends Component {
 
     return (
       <View style={styles.container}>
-        <Image source={require('./assets/background.png')} style={styles.imageContainer}>
+        <StatusBar barStyle="light-content"/>
+        {/*<Image source={require('./assets/background.png')} style={styles.imageContainer}>*/}
           <Swiper showsButtons={true}
             dot={<View style={{backgroundColor: 'rgba(255,255,255,.3)', width: 8, height: 8, borderRadius: 4, marginLeft: 4, marginRight: 4}} />}
               activeDot={<View style={{backgroundColor: '#fff', width: 8, height: 8, borderRadius: 4, marginLeft: 4, marginRight: 4}} />}
@@ -87,7 +82,7 @@ export default class HookerReactNative extends Component {
                 <View style={styles.footerView}></View>
               </View>
               <View style={styles.innerLayout}>
-                <Text style={styles.screenName}>#{this.state.screenName[0]}</Text>
+                <Text style={styles.screenName}>#{this.state.screenName[1]}</Text>
                 <ListView renderHeader={this._renderHeader} style={styles.listView} dataSource={this.state.dataSource} renderRow={(rowData) =>
                   <View>
                     <Text style={styles.listText}>{rowData}</Text>
@@ -95,7 +90,7 @@ export default class HookerReactNative extends Component {
                 <View style={styles.footerView}></View>
               </View>
               <View style={styles.innerLayout}>
-                <Text style={styles.screenName}>#{this.state.screenName[0]}</Text>
+                <Text style={styles.screenName}>#{this.state.screenName[2]}</Text>
                 <ListView renderHeader={this._renderHeader} style={styles.listView} dataSource={this.state.dataSource} renderRow={(rowData) =>
                   <View>
                     <Text style={styles.listText}>{rowData}</Text>
@@ -103,7 +98,7 @@ export default class HookerReactNative extends Component {
                 <View style={styles.footerView}></View>
               </View>
            </Swiper>
-        </Image>
+        {/*</Image>*/}
       </View>
     );
   }
@@ -113,7 +108,8 @@ const styles =  StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: 'rgba(34,53,69,1)'
   },
   imageContainer: {
     justifyContent: 'center',
@@ -142,11 +138,13 @@ const styles =  StyleSheet.create({
     fontSize:18,
     padding:4,
     alignSelf:'center',
-    fontWeight: '100'
+    fontWeight: '100',
+    color:'white',
   },
   buttonText: {
     color:'black',
-    fontSize:48
+    fontSize:48,
+    color:'white',
   },
   screenName: {
     flex:0.07,
@@ -157,7 +155,7 @@ const styles =  StyleSheet.create({
     textAlign:'right',
     color:'rgba(232,142,12,1)',
     fontWeight: 'bold',
-    backgroundColor:'rgba(255,255,255,0.2)',
+    backgroundColor:'rgba(255,255,255,0.1)',
   }
 });
 
