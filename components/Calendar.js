@@ -18,11 +18,9 @@ class Calendar extends Component {
   }
 
   componentDidMount() {
-    console.log(Moment().startOf("2014-04-25T01:32:21.196+0600"));
   }
 
   setMoment = (date) => {
-    console.log(date);
     this.setState({date});
   }
 
@@ -32,7 +30,7 @@ class Calendar extends Component {
             <CalendarDatePicker
               onChange={(date) => this.setMoment(date)}
               selected={this.state.date}
-              minDate={Moment()}
+              minDate={Moment().startOf('day')}
               maxDate={Moment().add(3, 'years').startOf()}
               yearMinTintColor={'rgba(232,142,12,1)'}
               yearMaxTintColor={'rgba(232,142,12,1)'}
@@ -47,6 +45,13 @@ class Calendar extends Component {
               barText={{
                 fontWeight: 'bold',
                 color: 'white',
+              }}
+              daySelectedText={{
+                fontWeight: 'bold',
+                backgroundColor: 'rgba(0,0,0,0.3)',
+                color: 'rgba(232,142,12,1)',
+                borderRadius: 15,
+                overflow: 'hidden',
               }}
               dayHeaderText={{
                 fontWeight: 'bold',
