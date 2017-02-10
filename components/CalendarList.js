@@ -7,6 +7,8 @@ import {
   Dimensions,
   ListView,
   StatusBar,
+  Modal,
+  TouchableHighlight
 } from 'react-native';
 
 import {
@@ -14,23 +16,9 @@ import {
 } from 'react-native-elements'
 
 import Calendar from './Calendar'
-import Swiper from 'react-native-swiper';
+import BookRoom from './BookRoom'
 
 class CalendarList extends Component {
-
-  onMomentumScrollEnd = (e, state, context) => {
-    this.setState({index:state.index});
-  }
-
-  _renderHeader() {
-    return (
-      <View style={styles.calendar}><Calendar/></View>
-    )
-  }
-
-  onButtonPress = (value) => {
-    console.log(value);
-  };
 
   constructor(props) {
     super(props);
@@ -38,6 +26,7 @@ class CalendarList extends Component {
       rowHasChanged: (r1, r2) => r1 !== r2
     });
     this.state = {
+      modalVisible: false,
       dataSource: ds.cloneWithRows([
               {'description': 'available from 00:00 to 08:00', 'available': true},
               {'description': 'not available from 08:00 to 09:00', 'available': false},
@@ -50,8 +39,31 @@ class CalendarList extends Component {
     };
   }
 
+  onMomentumScrollEnd = (e, state, context) => {
+    this.setState({index:state.index});
+  }
+
+  _renderHeader() {
+    return (
+      <View style={styles.calendar}><Calendar/></View>
+    )
+  }
+
   setMoment = (date) => {
     this.setState({date});
+  }
+
+  setModalVisible = (visible) => {
+    this.setState({modalVisible: visible});
+  }
+
+  onButtonPress = (value) => {
+    console.log(value);
+    this.setModalVisible(true);
+  };
+
+  onModalPress = () => {
+    this.setModalVisible(!this.state.modalVisible)
   }
 
     render() {
@@ -70,18 +82,19 @@ class CalendarList extends Component {
                   color='white'
                   accessibilityLabel="Learn more about this purple button"/>
               </View>}/>
+              <Modal
+                  animationType={"fade"}
+                  transparent={false}
+                  visible={this.state.modalVisible}
+                  >
+                 <BookRoom onModalPress={this.onModalPress}/>
+                </Modal>
           </View>
         );
     }
 }
 
 const styles =  StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(34,53,69,1)'
-  },
   screenName: {
     flex:0.07,
     paddingTop:40,
@@ -99,10 +112,6 @@ const styles =  StyleSheet.create({
     paddingRight:64,
     marginBottom:16,
     alignSelf:'center',
-  },
-  buttonText: {
-    fontSize:48,
-    color:'white',
   },
   rowButtons: {
     left: 16,

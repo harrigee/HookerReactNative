@@ -4,50 +4,75 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+ import React, { Component } from 'react';
+ import {
+   AppRegistry,
+   StyleSheet,
+   Text,
+   View,
+   Dimensions,
+   StatusBar,
+ } from 'react-native';
 
-export default class HookerReactNative extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
-    );
-  }
-}
+ import CalendarList from './components/CalendarList'
+ import Swiper from 'react-native-swiper';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+ vw = (percentageWidth) => {
+     return Dimensions.get('window').width * (percentageWidth / 100);
+ }
 
-AppRegistry.registerComponent('HookerReactNative', () => HookerReactNative);
+ vh = (percentageHeight) => {
+     return Dimensions.get('window').height * (percentageHeight / 100);
+ }
+
+ export default class HookerReactNative extends Component {
+
+   constructor() {
+     super();
+     this.state = {
+       screenName:['workshopRoom', 'meetingRoom', 'kitchen'],
+       index:0,
+     };
+   }
+
+   onMomentumScrollEnd = (e, state, context) => {
+     this.setState({index:state.index});
+   }
+
+   render() {
+     return (
+       <View style={styles.container}>
+         <StatusBar barStyle="light-content"/>
+         <Swiper showsButtons={true}
+           dot={<View style={{backgroundColor: 'rgba(255,255,255,.3)', width: 8, height: 8, borderRadius: 4, marginLeft: 4, marginRight: 4}} />}
+           activeDot={<View style={{backgroundColor: '#fff', width: 8, height: 8, borderRadius: 4, marginLeft: 4, marginRight: 4}} />}
+           nextButton={<Text style={styles.buttonText}>›</Text>}
+           prevButton={<Text style={styles.buttonText}>‹</Text>}
+           onMomentumScrollEnd ={this.onMomentumScrollEnd}
+           style={styles.swiper}
+           >
+           {this.state.screenName.map((item, index) => {
+             return(
+               <CalendarList key={index} screenName={item}/>
+             )
+           })}
+          </Swiper>
+       </View>
+     );
+   }
+ }
+
+ const styles =  StyleSheet.create({
+   container: {
+     flex: 1,
+     justifyContent: 'center',
+     alignItems: 'center',
+     backgroundColor: 'rgba(34,53,69,1)'
+   },
+   buttonText: {
+     fontSize:48,
+     color:'white',
+   }
+ });
+
+ AppRegistry.registerComponent('HookerReactNative', () => HookerReactNative);
