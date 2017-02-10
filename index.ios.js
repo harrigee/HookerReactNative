@@ -21,6 +21,7 @@ import {
 } from 'react-native-elements'
 
 import Calendar from './components/Calendar'
+import CalendarList from './components/CalendarList'
 import Swiper from 'react-native-swiper';
 
 vw = (percentageWidth) => {
@@ -41,15 +42,6 @@ export default class HookerReactNative extends Component {
     this.state = {
       screenName:['workshopRoom', 'meetingRoom', 'kitchen'],
       index:0,
-      dataSource: ds.cloneWithRows([
-              {'description': 'available from 00:00 to 08:00', 'available': true},
-              {'description': 'not available from 08:00 to 09:00', 'available': false},
-              {'description': 'available from 09:00 to 11:00', 'available': true},
-              {'description': 'not available from 11:00 to 12:00', 'available': false},
-              {'description': 'available from 12:00 to 14:00', 'available': true},
-              {'description': 'not available from 14:00 to 18:00', 'available': false},
-              {'description': 'available from 18:00 to 00:00', 'available': true},
-      ])
     };
   }
 
@@ -80,51 +72,11 @@ export default class HookerReactNative extends Component {
               onMomentumScrollEnd ={this.onMomentumScrollEnd}
               style={styles.swiper}
               >
-              <View style={styles.innerLayout}>
-                <Text style={styles.screenName}>#{this.state.screenName[0]}</Text>
-                <ListView renderHeader={this._renderHeader} style={styles.listView} dataSource={this.state.dataSource} renderRow={(rowData) =>
-                  <View style={styles.rowButtons}>
-                    <Button
-                      icon={rowData.available ? {name: 'check-circle', color: 'rgba(40,210,150,1)', size: 24} : {name: 'remove-circle', color: 'rgba(220,40,140,1)', size: 24}}
-                      backgroundColor= 'rgba(0,0,0,0)'
-                      fontSize={16}
-                      fontWeight={'100'}
-                      onPress={()=>this.onButtonPress(rowData.description)}
-                      title={rowData.description}
-                      color='white'
-                      accessibilityLabel="Learn more about this purple button"/>
-                  </View>}/>
-              </View>
-              <View style={styles.innerLayout}>
-                <Text style={styles.screenName}>#{this.state.screenName[1]}</Text>
-                <ListView renderHeader={this._renderHeader} style={styles.listView} dataSource={this.state.dataSource} renderRow={(rowData) =>
-                  <View style={styles.rowButtons}>
-                    <Button
-                      icon={rowData.available ? {name: 'check-circle', color: 'rgba(40,210,150,1)', size: 24} : {name: 'remove-circle', color: 'rgba(220,40,140,1)', size: 24}}
-                      backgroundColor= 'rgba(0,0,0,0)'
-                      fontSize={16}
-                      fontWeight={'100'}
-                      onPress={()=>this.onButtonPress(rowData.description)}
-                      title={rowData.description}
-                      color='white'
-                      accessibilityLabel="Learn more about this purple button"/>
-                  </View>}/>
-              </View>
-              <View style={styles.innerLayout}>
-                <Text style={styles.screenName}>#{this.state.screenName[2]}</Text>
-                <ListView renderHeader={this._renderHeader} style={styles.listView} dataSource={this.state.dataSource} renderRow={(rowData) =>
-                  <View style={styles.rowButtons}>
-                    <Button
-                      icon={rowData.available ? {name: 'check-circle', color: 'rgba(40,210,150,1)', size: 24} : {name: 'remove-circle', color: 'rgba(220,40,140,1)', size: 24}}
-                      backgroundColor= 'rgba(0,0,0,0)'
-                      fontSize={16}
-                      fontWeight={'100'}
-                      onPress={()=>this.onButtonPress(rowData.description)}
-                      title={rowData.description}
-                      color='white'
-                      accessibilityLabel="Learn more about this purple button"/>
-                  </View>}/>
-              </View>
+              {this.state.screenName.map((item, index) => {
+                return(
+                  <CalendarList key={index} screenName={item}/>
+                )
+              })}
            </Swiper>
       </View>
     );
