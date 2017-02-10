@@ -80,7 +80,7 @@ class CalendarList extends Component {
                   onPress={()=>this.onButtonPress(rowData.description)}
                   title={rowData.description}
                   color='white'
-                  accessibilityLabel="Learn more about this purple button"/>
+                  accessibilityLabel="timeslotButton"/>
               </View>}/>
               <Modal
                   animationType={"fade"}
