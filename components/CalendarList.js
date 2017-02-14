@@ -84,7 +84,7 @@ class CalendarList extends Component {
               </View>}/>
               <Modal
                   animationType={"fade"}
-                  transparent={false}
+                  transparent={true}
                   visible={this.state.modalVisible}
                   >
                  <BookRoom onModalPress={this.onModalPress}/>
