@@ -16,17 +16,17 @@ class BookRoom extends Component {
     super(props);
     this.state = {
       isFrom:false,
-      from:'From ',
-      to:'To ',
+      from:'From ' + this.props.data.from.format('HH:mm'),
+      to:'To ' + this.props.data.to.format('HH:mm'),
       isDateTimePickerVisible: false
     };
   }
 
-  _showDateTimePickerFrom = () => this.setState({ isDateTimePickerVisible: true, isFrom: true })
-  _showDateTimePickerTo = () => this.setState({ isDateTimePickerVisible: true, isFrom: false })
-  _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false })
+  showDateTimePickerFrom = () => this.setState({ isDateTimePickerVisible: true, isFrom: true })
+  showDateTimePickerTo = () => this.setState({ isDateTimePickerVisible: true, isFrom: false })
+  hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false })
 
-  _handleDatePicked = (date) => {
+  handleDatePicked = (date) => {
     if (this.state.isFrom) {
       this.setState({
         from:'From ' + Moment(date).format('HH:mm')
@@ -38,12 +38,12 @@ class BookRoom extends Component {
       });
     }
 
-    this._hideDateTimePicker()
+    this.hideDateTimePicker()
   }
 
   render() {
     return (
-      <View style={{backgroundColor: 'rgba(34,53,69,0.85)', flex:1}}>
+      <View style={{backgroundColor: 'rgba(34,53,69,0.9)', flex:1}}>
        <View style={{marginTop: 28, alignSelf:'flex-end', right:8}}>
          <Icon
            light
@@ -54,36 +54,39 @@ class BookRoom extends Component {
            backgroundColor='rgba(0,0,0,0)'
            onPress={() => this.props.onModalPress()} />
        </View>
-       <Text style={{color:'white', fontSize:22, alignSelf:'center', paddingLeft:32, paddingRight:32, paddingTop:16}}>
+       <Text style={{color:'white', fontWeight:'100', fontSize:22, textAlign:'center', paddingLeft:32, paddingRight:32, paddingTop:32}}>
          Please select the timeframe for your booking.
        </Text>
        <View style={styles.buttons}>
          <Button
-           icon={{name: 'arrow-left', type: 'font-awesome', color: 'rgba(40,210,150,1)', size: 38}}
-           backgroundColor= 'rgba(220,40,140,1)'
+           icon={{name: 'arrow-left', type: 'font-awesome', color: 'rgba(220,40,140,1)', size: 38}}
+           backgroundColor= 'rgba(40,210,150,1)'
            fontSize={24}
            fontWeight={'bold'}
-           onPress={this._showDateTimePickerFrom}
+           onPress={this.showDateTimePickerFrom}
            title={this.state.from}
-           color='rgba(40,210,150,1)'
+           color='rgba(220,40,140,1)'
            accessibilityLabel="timeslotButton"/>
          <Button
-           icon={{name: 'arrow-right', type: 'font-awesome', color: 'rgba(220,40,140,1)', size: 38}}
-           backgroundColor='rgba(40,210,150,1)'
+           icon={{name: 'arrow-right', type: 'font-awesome', color: 'rgba(40,210,150,1)', size: 38}}
+           backgroundColor='rgba(220,40,140,1)'
            fontSize={24}
            fontWeight={'bold'}
-           onPress={this._showDateTimePickerTo}
+           onPress={this.showDateTimePickerTo}
            title={this.state.to}
-           color='rgba(220,40,140,1)'
+           color='rgba(40,210,150,1)'
            iconRight='true'
            accessibilityLabel="timeslotButton"/>
          <DateTimePicker
-           titleIOS={ this.state.isFrom ? 'Select your start time' : 'Select your end time'}
+           titleIOS={this.state.isFrom ? 'Select your start time' : 'Select your end time'}
            mode={'time'}
            is24Hour={true}
+           date={this.state.isFrom ? this.props.data.from.toDate() : this.props.data.to.toDate()}
+           minimumDate={this.props.data.from.toDate()}
+           maxmimumDate={this.props.data.to.toDate()}
            isVisible={this.state.isDateTimePickerVisible}
-           onConfirm={this._handleDatePicked}
-           onCancel={this._hideDateTimePicker}
+           onConfirm={this.handleDatePicked}
+           onCancel={this.hideDateTimePicker}
          />
         </View>
       </View>
@@ -95,7 +98,7 @@ const styles =  StyleSheet.create({
   buttons: {
     flex:1,
     justifyContent: 'center',
-    paddingBottom:64
+    paddingBottom:96
   },
 });
 

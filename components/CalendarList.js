@@ -27,23 +27,25 @@ class CalendarList extends Component {
     });
     this.state = {
       modalVisible: false,
-      dataSource: ds.cloneWithRows([
-              {'description': 'available from 00:00 to 08:00', 'available': true},
-              {'description': 'not available from 08:00 to 09:00', 'available': false},
-              {'description': 'available from 09:00 to 11:00', 'available': true},
-              {'description': 'not available from 11:00 to 12:00', 'available': false},
-              {'description': 'available from 12:00 to 14:00', 'available': true},
-              {'description': 'not available from 14:00 to 18:00', 'available': false},
-              {'description': 'available from 18:00 to 00:00', 'available': true},
-      ])
+      dataSource: ds.cloneWithRows(this.props.timeslots),
+      activeRow: null
     };
+  }
+
+  getStringFromRow = (row) => {
+    if(row.available){
+      return 'available from ' + row.from.format('HH:mm') + ' to ' + row.to.format('HH:mm');
+    }
+    else {
+      return 'not available from ' + row.from.format('HH:mm') + ' to ' + row.to.format('HH:mm');
+    }
   }
 
   onMomentumScrollEnd = (e, state, context) => {
     this.setState({index:state.index});
   }
 
-  _renderHeader() {
+  renderHeader() {
     return (
       <View style={styles.calendar}><Calendar/></View>
     )
@@ -57,8 +59,10 @@ class CalendarList extends Component {
     this.setState({modalVisible: visible});
   }
 
-  onButtonPress = (value) => {
-    console.log(value);
+  onButtonPress = (rowData) => {
+    this.setState({
+      activeRow: rowData,
+    });
     this.setModalVisible(true);
   };
 
@@ -71,15 +75,15 @@ class CalendarList extends Component {
         return (
           <View style={styles.innerLayout}>
             <Text style={styles.screenName}>#{this.props.screenName}</Text>
-            <ListView renderHeader={this._renderHeader} style={styles.listView} dataSource={this.state.dataSource} renderRow={(rowData) =>
+            <ListView renderHeader={this.renderHeader} style={styles.listView} dataSource={this.state.dataSource} renderRow={(rowData) =>
               <View style={styles.rowButtons}>
                 <Button
                   icon={rowData.available ? {name: 'check-circle', color: 'rgba(40,210,150,1)', size: 24} : {name: 'remove-circle', color: 'rgba(220,40,140,1)', size: 24}}
                   backgroundColor= 'rgba(0,0,0,0)'
                   fontSize={16}
                   fontWeight={'100'}
-                  onPress={()=>this.onButtonPress(rowData.description)}
-                  title={rowData.description}
+                  onPress={()=>this.onButtonPress(rowData)}
+                  title={this.getStringFromRow(rowData)}
                   color='white'
                   accessibilityLabel="timeslotButton"/>
               </View>}/>
@@ -88,7 +92,7 @@ class CalendarList extends Component {
                   transparent={true}
                   visible={this.state.modalVisible}
                   >
-                 <BookRoom onModalPress={this.onModalPress}/>
+                 <BookRoom onModalPress={this.onModalPress} data={this.state.activeRow}/>
                 </Modal>
           </View>
         );

@@ -20,6 +20,7 @@ import {
 
 import CalendarList from './components/CalendarList'
 import Swiper from 'react-native-swiper';
+import Moment from 'moment';
 
 vw = (percentageWidth) => {
     return Dimensions.get('window').width * (percentageWidth / 100);
@@ -43,8 +44,19 @@ export default class HookerReactNative extends Component {
     this.setState({index:state.index});
   }
 
-  render() {
+  getTimeSlots = () => {
+    return [
+        {'from': Moment(), 'to': Moment().add(1, 'hours'), 'available': true},
+        {'from': Moment().add(2, 'hours'), 'to': Moment().add(3, 'hours'), 'available': false},
+        {'from': Moment().add(4, 'hours'), 'to': Moment().add(5, 'hours'), 'available': true},
+        {'from': Moment().add(6, 'hours'), 'to': Moment().add(7, 'hours'), 'available': false},
+        {'from': Moment().add(8, 'hours'), 'to': Moment().add(9, 'hours'), 'available': true},
+        {'from': Moment().add(10, 'hours'), 'to': Moment().add(11, 'hours'), 'available': false},
+        {'from': Moment().add(12, 'hours'), 'to': Moment().add(13, 'hours'), 'available': true},
+    ]
+  }
 
+  render() {
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content"/>
@@ -58,7 +70,7 @@ export default class HookerReactNative extends Component {
               >
               {this.state.screenName.map((item, index) => {
                 return(
-                  <CalendarList key={index} screenName={item}/>
+                  <CalendarList key={index} screenName={item} timeslots={this.getTimeSlots()}/>
                 )
               })}
            </Swiper>
