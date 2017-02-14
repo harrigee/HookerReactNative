@@ -43,46 +43,49 @@ class BookRoom extends Component {
 
   render() {
     return (
-      <View style={{backgroundColor: 'rgba(34,53,69,0.8)', flex:1}}>
+      <View style={{backgroundColor: 'rgba(34,53,69,0.85)', flex:1}}>
        <View style={{marginTop: 28, alignSelf:'flex-end', right:8}}>
          <Icon
-           reverse
+           light
            name='times'
            type='font-awesome'
-           color='rgba(232,142,12,1)'
+           size={36}
+           color='rgba(255,255,255,1)'
+           backgroundColor='rgba(0,0,0,0)'
            onPress={() => this.props.onModalPress()} />
        </View>
+       <Text style={{color:'white', fontSize:22, alignSelf:'center', paddingLeft:32, paddingRight:32, paddingTop:16}}>
+         Please select the timeframe for your booking.
+       </Text>
        <View style={styles.buttons}>
-
          <Button
            icon={{name: 'arrow-left', type: 'font-awesome', color: 'rgba(40,210,150,1)', size: 38}}
-           backgroundColor= 'rgba(0,0,0,0)'
+           backgroundColor= 'rgba(220,40,140,1)'
            fontSize={24}
-           fontWeight={'100'}
+           fontWeight={'bold'}
            onPress={this._showDateTimePickerFrom}
            title={this.state.from}
-           color='white'
+           color='rgba(40,210,150,1)'
            accessibilityLabel="timeslotButton"/>
-
          <Button
            icon={{name: 'arrow-right', type: 'font-awesome', color: 'rgba(220,40,140,1)', size: 38}}
-           backgroundColor= 'rgba(0,0,0,0)'
+           backgroundColor='rgba(40,210,150,1)'
            fontSize={24}
-           fontWeight={'100'}
+           fontWeight={'bold'}
            onPress={this._showDateTimePickerTo}
            title={this.state.to}
-           color='white'
+           color='rgba(220,40,140,1)'
+           iconRight='true'
            accessibilityLabel="timeslotButton"/>
-
-       <DateTimePicker
-         titleIOS={'Select your time'}
-         mode={'time'}
-         is24Hour={true}
-         isVisible={this.state.isDateTimePickerVisible}
-         onConfirm={this._handleDatePicked}
-         onCancel={this._hideDateTimePicker}
-       />
-     </View>
+         <DateTimePicker
+           titleIOS={ this.state.isFrom ? 'Select your start time' : 'Select your end time'}
+           mode={'time'}
+           is24Hour={true}
+           isVisible={this.state.isDateTimePickerVisible}
+           onConfirm={this._handleDatePicked}
+           onCancel={this._hideDateTimePicker}
+         />
+        </View>
       </View>
     );
   }
@@ -90,9 +93,9 @@ class BookRoom extends Component {
 
 const styles =  StyleSheet.create({
   buttons: {
-    marginTop:64,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
+    flex:1,
+    justifyContent: 'center',
+    paddingBottom:64
   },
 });
 
