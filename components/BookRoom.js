@@ -43,20 +43,17 @@ class BookRoom extends Component {
 
   render() {
     return (
-      <View style={{backgroundColor: 'rgba(34,53,69,0.9)', flex:1}}>
-       <View style={{marginTop: 28, alignSelf:'flex-end', right:8}}>
-         <Icon
-           light
-           name='times'
-           type='font-awesome'
-           size={36}
-           color='rgba(255,255,255,1)'
-           backgroundColor='rgba(0,0,0,0)'
-           onPress={() => this.props.onModalPress()} />
-       </View>
-       <Text style={{color:'white', fontWeight:'100', fontSize:22, textAlign:'center', paddingLeft:32, paddingRight:32, paddingTop:32}}>
+      <View style={{backgroundColor: 'rgba(34,53,69,0.95)', flex:1}}>
+       <Text style={{color:'white', fontWeight:'200', fontSize:22, textAlign:'center', paddingLeft:32, paddingRight:32, paddingTop:32, paddingBottom:48}}>
          Please select a timeframe for your booking.
        </Text>
+       <Icon
+         name='clock-o'
+         type='font-awesome'
+         size={96}
+         color='white'
+         backgroundColor='rgba(220,40,140,1)'
+         onPress={() => this.props.onModalPress()} />
        <View style={styles.buttons}>
          <Button
            icon={{name: 'arrow-left', type: 'font-awesome', color: 'rgba(220,40,140,1)', size: 38}}
@@ -98,7 +95,7 @@ const styles =  StyleSheet.create({
   buttons: {
     flex:1,
     justifyContent: 'center',
-    paddingBottom:96
+    paddingBottom:196
   },
 });
 
