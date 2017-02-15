@@ -55,7 +55,7 @@ class BookRoom extends Component {
            onPress={() => this.props.onModalPress()} />
        </View>
        <Text style={{color:'white', fontWeight:'100', fontSize:22, textAlign:'center', paddingLeft:32, paddingRight:32, paddingTop:32}}>
-         Please select the timeframe for your booking.
+         Please select a timeframe for your booking.
        </Text>
        <View style={styles.buttons}>
          <Button
@@ -81,9 +81,9 @@ class BookRoom extends Component {
            titleIOS={this.state.isFrom ? 'Select your start time' : 'Select your end time'}
            mode={'time'}
            is24Hour={true}
-           date={this.state.isFrom ? this.props.data.from.toDate() : this.props.data.to.toDate()}
+           date={this.props.data.from.toDate()}
            minimumDate={this.props.data.from.toDate()}
-           maxmimumDate={this.props.data.to.toDate()}
+           maximumDate={this.props.data.to.toDate()}
            isVisible={this.state.isDateTimePickerVisible}
            onConfirm={this.handleDatePicked}
            onCancel={this.hideDateTimePicker}

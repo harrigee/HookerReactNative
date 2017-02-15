@@ -63,7 +63,9 @@ class CalendarList extends Component {
     this.setState({
       activeRow: rowData,
     });
-    this.setModalVisible(true);
+    if(rowData.available === true) {
+      this.setModalVisible(true);
+    }
   };
 
   onModalPress = () => {
@@ -121,7 +123,7 @@ const styles =  StyleSheet.create({
   rowButtons: {
     left: 16,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-start'
   },
   listView: {
     marginTop:-8,

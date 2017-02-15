@@ -18,6 +18,7 @@ import {
   Button
 } from 'react-native-elements'
 
+import * as firebase from 'firebase';
 import CalendarList from './components/CalendarList'
 import Swiper from 'react-native-swiper';
 import Moment from 'moment';
