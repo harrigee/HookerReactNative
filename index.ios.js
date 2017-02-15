@@ -35,8 +35,9 @@ export default class HookerReactNative extends Component {
 
   constructor() {
     super();
+    let apiService = new APIService();
     this.state = {
-      screenName:['workshopRoom', 'meetingRoom', 'kitchen'],
+      screenNames:apiService.getRoomList(),
       index:0,
     };
   }
@@ -58,9 +59,9 @@ export default class HookerReactNative extends Component {
               onMomentumScrollEnd ={this.onMomentumScrollEnd}
               style={styles.swiper}
               >
-              {this.state.screenName.map((item, index) => {
+              {this.state.screenNames.map((item, index) => {
                 return(
-                  <CalendarList key={index} screenName={item} timeslots={apiService.getTimeSlots()}/>
+                  <CalendarList key={index} screenName={item} timeslots={apiService.getTimeSlots(item)}/>
                 )
               })}
            </Swiper>
