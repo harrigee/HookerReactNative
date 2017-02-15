@@ -33,11 +33,12 @@ vh = (percentageHeight) => {
 
 export default class HookerReactNative extends Component {
 
+  apiService = new APIService();
+
   constructor() {
     super();
-    let apiService = new APIService();
     this.state = {
-      screenNames:apiService.getRoomList(),
+      screenNames:this.apiService.getRoomList(),
       index:0,
     };
   }
@@ -47,7 +48,6 @@ export default class HookerReactNative extends Component {
   }
 
   render() {
-    let apiService = new APIService();
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content"/>
@@ -61,7 +61,7 @@ export default class HookerReactNative extends Component {
               >
               {this.state.screenNames.map((item, index) => {
                 return(
-                  <CalendarList key={index} screenName={item} timeslots={apiService.getTimeSlots(item)}/>
+                  <CalendarList key={index} screenName={item} timeslots={this.apiService.getTimeSlots(item)}/>
                 )
               })}
            </Swiper>
