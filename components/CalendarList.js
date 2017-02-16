@@ -69,7 +69,6 @@ class CalendarList extends Component {
   };
 
   onModalPress = () => {
-    console.log('LOOOL');
     this.setModalVisible(!this.state.modalVisible);
   }
 
