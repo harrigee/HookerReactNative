@@ -17,9 +17,6 @@ class Calendar extends Component {
     };
   }
 
-  componentDidMount() {
-  }
-
   setMoment = (date) => {
     this.setState({date});
   }

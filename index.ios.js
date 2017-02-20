@@ -61,7 +61,7 @@ export default class HookerReactNative extends Component {
               >
               {this.state.screenNames.map((item, index) => {
                 return(
-                  <CalendarList key={index} screenName={item} timeslots={this.apiService.getTimeSlots(item)}/>
+                  <CalendarList key={index} screenName={item}/>
                 )
               })}
            </Swiper>

@@ -17,19 +17,32 @@ import {
 
 import Calendar from './Calendar'
 import BookRoom from './BookRoom'
+import APIService from '../API/APIService'
 
 class CalendarList extends Component {
 
+  apiService = new APIService();
+  ds = new ListView.DataSource({
+    rowHasChanged: (r1, r2) => r1 !== r2
+  });
+
   constructor(props) {
     super(props);
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    });
     this.state = {
       modalVisible: false,
-      dataSource: ds.cloneWithRows(this.props.timeslots),
+      dataSource: this.ds.cloneWithRows([]),
       activeRow: null
     };
+  }
+
+  componentDidMount() {
+    var saveThis = this;
+    this.apiService.getTimeSlots(this.props.screenName)
+    .then(function(response) {
+        saveThis.setState({
+            dataSource: saveThis.ds.cloneWithRows(response),
+        });
+    });
   }
 
   getStringFromRow = (row) => {
@@ -76,7 +89,7 @@ class CalendarList extends Component {
         return (
           <View style={styles.innerLayout}>
             <Text style={styles.screenName}>#{this.props.screenName}</Text>
-            <ListView renderHeader={this.renderHeader} style={styles.listView} dataSource={this.state.dataSource} renderRow={(rowData) =>
+            <ListView enableEmptySections={true} renderHeader={this.renderHeader} style={styles.listView} dataSource={this.state.dataSource} renderRow={(rowData) =>
               <View style={styles.rowButtons}>
                 <Button
                   icon={rowData.available ? {name: 'check-circle', color: 'rgba(40,210,150,1)', size: 24} : {name: 'remove-circle', color: 'rgba(220,40,140,1)', size: 24}}
@@ -94,7 +107,7 @@ class CalendarList extends Component {
                   visible={this.state.modalVisible}
                   >
                  <BookRoom onModalPress={this.onModalPress} data={this.state.activeRow}/>
-                </Modal>
+              </Modal>
           </View>
         );
     }
