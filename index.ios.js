@@ -38,9 +38,19 @@ export default class HookerReactNative extends Component {
   constructor() {
     super();
     this.state = {
-      screenNames:this.apiService.getRoomList(),
+      screenNames:[],
       index:0,
     };
+  }
+
+  componentDidMount() {
+    var saveThis = this;
+    this.apiService.getRoomList()
+    .then(function(response) {
+        saveThis.setState({
+            screenNames: response,
+        });
+    });
   }
 
   onMomentumScrollEnd = (e, state, context) => {
